@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>悪夢の旅: Nightmare Journey</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&family=Noto+Sans+JP:wght@300;700&display=swap');
+
+        :root {
+            --bg-color: transparent;
+            --text-color: #ffffff;
+            --accent-color: #ff0000;
+            --shadow-color: rgba(255, 0, 0, 0.3);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem;
+            box-sizing: border-box;
+            margin-top: -20vh;
+            padding-top: 20vh;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 5;
+        }
+
+        .content {
+            flex: 1;
+            max-width: 45%;
+            padding: 1.5rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--accent-color);
+            text-align: center;
+            box-shadow: 0 0 20px var(--shadow-color);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .image-container {
+            flex: 1;
+            max-width: 45%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .dynamic-image {
+            max-width: 100%;
+            max-height: 50vh;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.1);
+            transition: opacity 0.8s, transform 0.8s;
+            mask-image: linear-gradient(to bottom, 
+                transparent 0%, black 10%, 
+                black 90%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, 
+                transparent 0%, black 10%, 
+                black 90%, transparent 100%);
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 1;
+            transition: opacity 0.8s;
+            filter: grayscale(50%) sepia(50%) brightness(50%) hue-rotate(320deg);
+        }
+
+        h2 {
+            font-family: 'Yusei Magic', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-shadow: 2px 2px 4px var(--shadow-color);
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .ghost {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            background-image: url('glitch.png');
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .blood-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('hehe.jpg');
+            background-size: cover;
+            opacity: 0;
+            mix-blend-mode: multiply;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .glitch-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            opacity: 0;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        @keyframes flickerAnimation {
+            0%   { opacity: 0; }
+            50%  { opacity: 0.1; }
+            100% { opacity: 0; }
+        }
+
+        .flicker {
+            animation: flickerAnimation 0.2s infinite;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background-color: var(--accent-color);
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .content, .image-container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar"></div>
+    <div class="ghost"></div>
+    <div class="blood-overlay"></div>
+    <div class="glitch-effect"></div>
+
+    <div class="section" id="section1">
+        <div class="background" style="background-image: url('bgg.gif');"></div>
+        <div class="content-wrapper">
+            <div class="content">
+                <h2>闇の囁き (Whispers of the Dark)</h2>
+                <p>In a secluded village nestled deep within the mountains, whispers of an ancient curse lingered. The villagers spoke of a malevolent spirit that haunted the forest, preying on those who dared to enter after sunset. One night, a young artist named Yuki ventured into the forest, drawn by an inexplicable urge to capture its eerie beauty on canvas.</p>
+            </div>
+            <div class="image-container">
+                <img src="image1.jpeg" alt="Eerie forest" class="dynamic-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="section2">
+        <div class="background" style="background-image: url('bgg.gif');"></div>
+        <div class="content-wrapper">
+            <div class="image-container">
+                <img src="image2.jpeg" alt="Blood moon" class="dynamic-image">
+            </div>
+            <div class="content">
+                <h2>血の月 (Blood Moon)</h2>
+                <p>As Yuki painted under the light of a blood-red moon, she felt an icy breath on her neck. Turning around, she saw a ghostly figure with hollow eyes and a twisted smile. The spirit, known as Akuma, revealed itself to be the source of the curse. It demanded a sacrifice to quench its thirst for blood, and Yuki was its chosen victim.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="section3">
+        <div class="background" style="background-image: url('bgg.gif');"></div>
+        <div class="content-wrapper">
+            <div class="content">
+                <h2>呪われた筆 (Cursed Brush)</h2>
+                <p>Desperate to escape, Yuki discovered an ancient brush hidden in the forest. Legend had it that this brush could trap spirits within the paintings it created. With trembling hands, she began to paint Akuma, hoping to imprison the spirit. But as she painted, the brush seemed to take on a life of its own, drawing her deeper into the darkness.</p>
+            </div>
+            <div class="image-container">
+                <img src="image3.jpeg" alt="Cursed brush" class="dynamic-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="section4">
+        <div class="background" style="background-image: url('bgg.gif');"></div>
+        <div class="content-wrapper">
+            <div class="image-container">
+                <img src="image4.jpeg" alt="Forest of despair" class="dynamic-image">
+            </div>
+            <div class="content">
+                <h2>絶望の森 (Forest of Despair)</h2>
+                <p>Yuki's paintings became increasingly grotesque, depicting scenes of unimaginable horror. The villagers, noticing her descent into madness, tried to intervene but were met with gruesome fates. The forest itself seemed to come alive, its twisted trees and blood-soaked ground reflecting the torment within Yuki's soul.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="section5">
+        <div class="background" style="background-image: url('bgg.gif');"></div>
+        <div class="content-wrapper">
+            <div class="content">
+                <h2>永遠の囚人 (Eternal Prisoner)</h2>
+                <p>In a final, desperate act, Yuki completed the painting of Akuma. The spirit was drawn into the canvas, its screams echoing through the forest. But the victory was short-lived. Yuki found herself trapped within her own creation, an eternal prisoner in a world of her own making. The villagers, now free from the curse, spoke of the haunted artist whose paintings still whispered in the dark.</p>
+            </div>
+            <div class="image-container">
+                <img src="image5.jpeg" alt="Eternal prisoner" class="dynamic-image">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        const progressBar = document.querySelector('.progress-bar');
+        const ghost = document.querySelector('.ghost');
+        const bloodOverlay = document.querySelector('.blood-overlay');
+        const glitchEffect = document.querySelector('.glitch-effect');
+
+        function updateSection(section) {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const scrollPosition = window.pageYOffset;
+            const windowHeight = window.innerHeight;
+
+            if (scrollPosition > sectionTop - windowHeight / 1.5 && // Changed from 2 to 1.5
+                scrollPosition < sectionTop + sectionHeight - windowHeight / 1.5) { // Changed from 2 to 1.5
+                const scrollPercentage = (scrollPosition - (sectionTop - windowHeight / 1.5)) / 
+                                         (sectionHeight - windowHeight / 1.5);
+                const clampedPercentage = Math.min(Math.max(scrollPercentage, 0), 1);
+
+                const content = section.querySelector('.content');
+                const image = section.querySelector('.dynamic-image');
+                if (content) {
+                    content.style.opacity = clampedPercentage;
+                    content.style.transform = `translateY(${50 - clampedPercentage * 50}px)`;
+                }
+                if (image) {
+                    image.style.opacity = clampedPercentage;
+                    image.style.transform = `scale(${1 + (1 - clampedPercentage) * 0.1})`;
+                }
+
+                const background = section.querySelector('.background');
+                if (background) {
+                    background.style.opacity = clampedPercentage;
+                }
+
+                if (clampedPercentage > 0.5 && clampedPercentage < 0.7) {
+                    triggerEffects();
+                }
+            }
+        }
+
+        function triggerEffects() {
+            ghost.style.opacity = '0.7';
+            ghost.style.left = `${Math.random() * (window.innerWidth - 100)}px`;
+            ghost.style.top = `${Math.random() * (window.innerHeight - 100)}px`;
+            setTimeout(() => { ghost.style.opacity = '0'; }, 500);
+
+            bloodOverlay.style.opacity = '1';
+            setTimeout(() => { bloodOverlay.style.opacity = '0'; }, 300);
+
+            glitchEffect.classList.add('flicker');
+            setTimeout(() => { glitchEffect.classList.remove('flicker'); }, 200);
+        }
+
+        function handleScroll() {
+            sections.forEach(updateSection);
+
+            const scrollPercentage = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.width = `${scrollPercentage}%`;
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleScroll);
+        handleScroll();
+
+        (function() {
+            var checkbox = document.createElement('div');
+            checkbox.innerHTML = '<input type="checkbox" id="autoScroll"><label for="autoScroll">Auto-scroll</label>';
+            checkbox.style.cssText = 'position:fixed;bottom:20px;left:20px;z-index:10000;color:#fff;font-size:14px;';
+            document.body.appendChild(checkbox);
+
+            var autoScrollInterval;
+            document.getElementById('autoScroll').addEventListener('change', function() {
+                if (this.checked) {
+                    autoScrollInterval = setInterval(function() {
+                        window.scrollBy(0, 2);
+                        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                            window.scrollTo(0, 0);
+                        }
+                    }, 20);
+                } else {
+                    clearInterval(autoScrollInterval);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
